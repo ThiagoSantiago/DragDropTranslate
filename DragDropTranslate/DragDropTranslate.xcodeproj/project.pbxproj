@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1874C58F2123B25F0004D1AA /* TranslateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1874C58E2123B25F0004D1AA /* TranslateTableViewCell.swift */; };
 		18F178B021237D8200C01BC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F178AF21237D8200C01BC5 /* AppDelegate.swift */; };
 		18F178B221237D8200C01BC5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F178B121237D8200C01BC5 /* ViewController.swift */; };
 		18F178B521237D8200C01BC5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18F178B321237D8200C01BC5 /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1874C58E2123B25F0004D1AA /* TranslateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateTableViewCell.swift; sourceTree = "<group>"; };
 		18F178AC21237D8200C01BC5 /* DragDropTranslate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DragDropTranslate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18F178AF21237D8200C01BC5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18F178B121237D8200C01BC5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -35,6 +37,62 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1874C58621239D210004D1AA /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				1874C58921239D8F0004D1AA /* Translate */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		1874C58821239D6B0004D1AA /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		1874C58921239D8F0004D1AA /* Translate */ = {
+			isa = PBXGroup;
+			children = (
+				1874C58A21239DA20004D1AA /* Interactor */,
+				1874C58B21239DAD0004D1AA /* Presenter */,
+				1874C58C21239DB60004D1AA /* View */,
+			);
+			path = Translate;
+			sourceTree = "<group>";
+		};
+		1874C58A21239DA20004D1AA /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		1874C58B21239DAD0004D1AA /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		1874C58C21239DB60004D1AA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1874C58D2123B1F60004D1AA /* CustomViews */,
+				18F178B121237D8200C01BC5 /* ViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1874C58D2123B1F60004D1AA /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				1874C58E2123B25F0004D1AA /* TranslateTableViewCell.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
 		18F178A321237D8200C01BC5 = {
 			isa = PBXGroup;
 			children = (
@@ -54,8 +112,9 @@
 		18F178AE21237D8200C01BC5 /* DragDropTranslate */ = {
 			isa = PBXGroup;
 			children = (
+				1874C58821239D6B0004D1AA /* Repository */,
+				1874C58621239D210004D1AA /* Scenes */,
 				18F178AF21237D8200C01BC5 /* AppDelegate.swift */,
-				18F178B121237D8200C01BC5 /* ViewController.swift */,
 				18F178B321237D8200C01BC5 /* Main.storyboard */,
 				18F178B621237D8200C01BC5 /* Assets.xcassets */,
 				18F178B821237D8200C01BC5 /* LaunchScreen.storyboard */,
@@ -138,6 +197,7 @@
 			files = (
 				18F178B221237D8200C01BC5 /* ViewController.swift in Sources */,
 				18F178B021237D8200C01BC5 /* AppDelegate.swift in Sources */,
+				1874C58F2123B25F0004D1AA /* TranslateTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
