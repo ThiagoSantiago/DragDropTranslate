@@ -8,22 +8,40 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+protocol DragDropTranslateViewControllerDelegate {
+    func showTextTranslated(_ text: String)
+    func showErrorMessage(_ error: String)
+}
+
+class DragDropTranslateViewController: UIViewController {
     
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var tableView: UITableView!
     
-    var translateData = [String]()
+    var toTranslateData = [String]()
+    var translatedData = [String]()
+    
+    var interactor: TranslateInteractor?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setInitialConfig()
+    }
+    
+    func setInitialConfig() {
         textView.textDragDelegate = self
         tableView.dropDelegate = self
         tableView.dataSource = self
+        
+        let interactor = TranslateInteractor()
+        self.interactor = interactor
+        let presenter = TranslatePresenter()
+        presenter.viewController = self
+        interactor.presenter = presenter
     }
 }
 
-extension ViewController: UITextDragDelegate, UITableViewDropDelegate {
+extension DragDropTranslateViewController: UITextDragDelegate, UITableViewDropDelegate {
     func textDraggableView(_ textDraggableView: UIView & UITextDraggable, dragPreviewForLiftingItem item: UIDragItem, session: UIDragSession) -> UITargetedDragPreview? {
         let imageView = UIImageView(image: UIImage(named: "drag"))
         imageView.backgroundColor = .clear
@@ -38,7 +56,7 @@ extension ViewController: UITextDragDelegate, UITableViewDropDelegate {
     func textDraggableView(_ textDraggableView: UIView & UITextDraggable, itemsForDrag dragRequest: UITextDragRequest) -> [UIDragItem] {
     
         guard let textSelected = textView.text(in: dragRequest.dragRange) else { return [] }
-        print("\(textSelected)")
+        
         let itemProvider = NSItemProvider(object: textSelected as NSString)
         let itemDragged = UIDragItem(itemProvider: itemProvider)
         return [itemDragged]
@@ -57,24 +75,44 @@ extension ViewController: UITextDragDelegate, UITableViewDropDelegate {
         coordinator.session.loadObjects(ofClass: NSString.self) { items in
             guard let stringArray = items as? [String] else { return }
             
-            self.translateData.insert(stringArray.first!, at: destinationIndexPath.row)
+            self.toTranslateData.insert(stringArray.first!, at: destinationIndexPath.row)
             tableView.insertRows(at: [destinationIndexPath], with: .automatic)
+            
+            self.interactor?.translate(text: stringArray.first!)
         }
     }
 }
 
-extension ViewController: UITableViewDataSource {
+extension DragDropTranslateViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return translateData.count
+        return toTranslateData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TranslateTableViewCell", for: indexPath) as! TranslateTableViewCell
         
-        let textDragged = translateData[indexPath.row]
+        let textDragged = toTranslateData[indexPath.row]
+        var textTranslated = ""
+        
+        if toTranslateData.count == translatedData.count {
+            textTranslated = translatedData[indexPath.row]
+        }
+       
+        
         cell.textToTranslate.text = textDragged
+        cell.textTranslated.text = textTranslated
         
         return cell
+    }
+}
+
+extension DragDropTranslateViewController: DragDropTranslateViewControllerDelegate {
+    func showTextTranslated(_ text: String) {
+        translatedData.append(text)
+    }
+    
+    func showErrorMessage(_ error: String) {
+        print("Error!!!")
     }
 }
 
